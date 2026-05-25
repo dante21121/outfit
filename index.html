@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8" />
+	<meta
+		name="viewport"
+		content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+	/>
+
+	<title>Outfit App</title>
+
+	<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+	<header class="header">
+		<h1>Outfit</h1>
+	</header>
+
+	<main class="container">
+
+		<section class="outfit-section">
+
+			<div class="clothing-slot">
+				<img id="topImage" src="" alt="">
+			</div>
+
+			<div class="clothing-slot">
+				<img id="bottomImage" src="" alt="">
+			</div>
+
+			<div class="clothing-slot shoes">
+				<img id="shoesImage" src="" alt="">
+			</div>
+
+		</section>
+
+		<button id="generateBtn" class="generate-btn">
+			Generar Outfit
+		</button>
+
+		<section class="upload-section">
+
+			<h2>Agregar prenda</h2>
+
+			<select id="typeSelect">
+				<option value="top">Remera / Buzo</option>
+				<option value="bottom">Pantalón</option>
+				<option value="shoes">Zapatillas</option>
+			</select>
+
+			<input type="file" id="fileInput" accept="image/*">
+
+			<button id="saveBtn">
+				Guardar
+			</button>
+
+		</section>
+
+	</main>
+
+	<script src="storage.js"></script>
+	<script src="app.js"></script>
+
+</body>
+</html>
