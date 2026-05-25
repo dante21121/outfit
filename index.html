@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+
 	<meta charset="UTF-8" />
+
 	<meta
 		name="viewport"
 		content="width=device-width, initial-scale=1.0, viewport-fit=cover"
@@ -10,11 +12,18 @@
 	<title>Outfit App</title>
 
 	<link rel="stylesheet" href="style.css" />
+
 </head>
 <body>
 
 	<header class="header">
+
 		<h1>Outfit</h1>
+
+		<button id="closetBtn" class="closet-btn">
+			Mi ropa
+		</button>
+
 	</header>
 
 	<main class="container">
@@ -44,12 +53,26 @@
 			<h2>Agregar prenda</h2>
 
 			<select id="typeSelect">
-				<option value="top">Remera / Buzo</option>
-				<option value="bottom">Pantalón</option>
-				<option value="shoes">Zapatillas</option>
+
+				<option value="top">
+					Remera / Buzo
+				</option>
+
+				<option value="bottom">
+					Pantalón
+				</option>
+
+				<option value="shoes">
+					Zapatillas
+				</option>
+
 			</select>
 
-			<input type="file" id="fileInput" accept="image/*">
+			<input
+				type="file"
+				id="fileInput"
+				accept="image/*"
+			>
 
 			<button id="saveBtn">
 				Guardar
@@ -58,6 +81,61 @@
 		</section>
 
 	</main>
+
+
+
+
+
+	<div id="closetModal" class="closet-modal">
+
+		<div class="closet-header">
+
+			<h2>Mi ropa</h2>
+
+			<button id="closeClosetBtn">
+				Cerrar
+			</button>
+
+		</div>
+
+		<div class="closet-content">
+
+			<section class="category-section">
+
+				<h3>Parte superior</h3>
+
+				<div
+					id="topGrid"
+					class="clothes-grid"
+				></div>
+
+			</section>
+
+			<section class="category-section">
+
+				<h3>Parte inferior</h3>
+
+				<div
+					id="bottomGrid"
+					class="clothes-grid"
+				></div>
+
+			</section>
+
+			<section class="category-section">
+
+				<h3>Zapatillas</h3>
+
+				<div
+					id="shoesGrid"
+					class="clothes-grid"
+				></div>
+
+			</section>
+
+		</div>
+
+	</div>
 
 	<script src="storage.js"></script>
 	<script src="app.js"></script>
