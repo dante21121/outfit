@@ -53,6 +53,8 @@ function saveClothing() {
 
 		const type = typeSelect.value;
 
+		if (!type) return;
+
 		clothes[type].push(item);
 
 		saveClothes(clothes);
