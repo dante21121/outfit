@@ -153,9 +153,9 @@ function saveClothing() {
 
 async function generateOutfit() {
 
-	const duration = 500;
+	const duration = 2000;
 
-	const interval = 80;
+	const interval = 340;
 
 	const loops =
 		Math.floor(duration / interval);
