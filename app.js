@@ -146,8 +146,6 @@ function saveClothing() {
 		resetUploadInputs();
 
 		renderCloset();
-
-		generateOutfit();
 	};
 
 	reader.readAsDataURL(file);
