@@ -50,13 +50,25 @@ let selectingType = null;
 
 let deleteData = null;
 
-saveBtn.addEventListener("click", saveClothing);
+saveBtn.addEventListener(
+	"click",
+	saveClothing
+);
 
-generateBtn.addEventListener("click", generateOutfit);
+generateBtn.addEventListener(
+	"click",
+	generateOutfit
+);
 
-closetBtn.addEventListener("click", openCloset);
+closetBtn.addEventListener(
+	"click",
+	openCloset
+);
 
-closeClosetBtn.addEventListener("click", closeCloset);
+closeClosetBtn.addEventListener(
+	"click",
+	closeCloset
+);
 
 cancelDeleteBtn.addEventListener(
 	"click",
@@ -79,19 +91,24 @@ document.addEventListener(
 	}
 );
 
-fileInput.addEventListener("change", () => {
+fileInput.addEventListener(
+	"change",
+	() => {
 
-	if (fileInput.files[0]) {
+		const file = fileInput.files[0];
+
+		if (!file) {
+
+			fileText.textContent =
+				"Seleccionar prenda";
+
+			return;
+		}
 
 		fileText.textContent =
-			fileInput.files[0].name;
-
-	} else {
-
-		fileText.textContent =
-			"Seleccionar prenda";
+			file.name;
 	}
-});
+);
 
 function resetUploadInputs() {
 
@@ -100,11 +117,7 @@ function resetUploadInputs() {
 	fileText.textContent =
 		"Seleccionar prenda";
 
-	typeSelect.value = "";
-
-	fileInput.type = "";
-
-	fileInput.type = "file";
+	typeSelect.selectedIndex = 0;
 }
 
 function saveClothing() {
@@ -177,7 +190,9 @@ function getRandomItem(array) {
 	if (array.length === 0) return null;
 
 	return array[
-		Math.floor(Math.random() * array.length)
+		Math.floor(
+			Math.random() * array.length
+		)
 	];
 }
 
@@ -208,34 +223,56 @@ function openCloset() {
 
 	closetModal.classList.add("open");
 
-	document.body.classList.add("modal-open");
+	document.body.classList.add(
+		"modal-open"
+	);
 }
 
 function closeCloset() {
 
 	closetModal.classList.remove("open");
 
-	document.body.classList.remove("modal-open");
+	document.body.classList.remove(
+		"modal-open"
+	);
 }
 
 function renderCloset() {
 
-	renderCategory(topGrid, clothes.top, "top");
+	renderCategory(
+		topGrid,
+		clothes.top,
+		"top"
+	);
 
-	renderCategory(bottomGrid, clothes.bottom, "bottom");
+	renderCategory(
+		bottomGrid,
+		clothes.bottom,
+		"bottom"
+	);
 
-	renderCategory(shoesGrid, clothes.shoes, "shoes");
+	renderCategory(
+		shoesGrid,
+		clothes.shoes,
+		"shoes"
+	);
 }
 
-function renderCategory(container, items, type) {
+function renderCategory(
+	container,
+	items,
+	type
+) {
 
 	container.innerHTML = "";
 
 	items.forEach(item => {
 
-		const card = document.createElement("div");
+		const card =
+			document.createElement("div");
 
-		card.className = "clothing-card";
+		card.className =
+			"clothing-card";
 
 		card.innerHTML = `
 			<img
@@ -251,21 +288,31 @@ function renderCategory(container, items, type) {
 		`;
 
 		const image =
-			card.querySelector(".closet-image");
+			card.querySelector(
+				".closet-image"
+			);
 
 		image.onclick = () => {
 
-			selectClothing(type, item.id);
+			selectClothing(
+				type,
+				item.id
+			);
 		};
 
 		const deleteBtn =
-			card.querySelector(".delete-btn");
+			card.querySelector(
+				".delete-btn"
+			);
 
 		deleteBtn.onclick = (e) => {
 
 			e.stopPropagation();
 
-			openDeleteModal(item.id, type);
+			openDeleteModal(
+				item.id,
+				type
+			);
 		};
 
 		container.appendChild(card);
@@ -279,12 +326,16 @@ function openDeleteModal(id, type) {
 		type
 	};
 
-	confirmModal.classList.add("open");
+	confirmModal.classList.add(
+		"open"
+	);
 }
 
 function closeDeleteModal() {
 
-	confirmModal.classList.remove("open");
+	confirmModal.classList.remove(
+		"open"
+	);
 
 	deleteData = null;
 }
@@ -310,7 +361,9 @@ function confirmDelete() {
 	) {
 
 		currentOutfit[type] =
-			getRandomItem(clothes[type]);
+			getRandomItem(
+				clothes[type]
+			);
 
 		renderOutfit();
 	}
@@ -322,9 +375,13 @@ function openCategorySelector(type) {
 
 	selectingType = type;
 
-	closetModal.classList.add("open");
+	closetModal.classList.add(
+		"open"
+	);
 
-	document.body.classList.add("modal-open");
+	document.body.classList.add(
+		"modal-open"
+	);
 
 	categorySections.forEach(section => {
 
