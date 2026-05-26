@@ -36,11 +36,29 @@ closetBtn.addEventListener("click", openCloset);
 
 closeClosetBtn.addEventListener("click", closeCloset);
 
+fileInput.addEventListener("change", () => {
+
+	if (fileInput.files[0]) {
+
+		fileText.textContent =
+			fileInput.files[0].name;
+
+	} else {
+
+		fileText.textContent =
+			"Seleccionar prenda";
+	}
+});
+
 function saveClothing() {
 
 	const file = fileInput.files[0];
 
 	if (!file) return;
+
+	const type = typeSelect.value;
+
+	if (!type) return;
 
 	const reader = new FileReader();
 
@@ -51,15 +69,16 @@ function saveClothing() {
 			image: e.target.result
 		};
 
-		const type = typeSelect.value;
-
-		if (!type) return;
-
 		clothes[type].push(item);
 
 		saveClothes(clothes);
 
 		fileInput.value = "";
+
+		fileText.textContent =
+			"Seleccionar prenda";
+
+		typeSelect.selectedIndex = 0;
 
 		renderCloset();
 
