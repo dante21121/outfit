@@ -68,6 +68,17 @@ confirmDeleteBtn.addEventListener(
 	confirmDelete
 );
 
+document.addEventListener(
+	"visibilitychange",
+	() => {
+
+		if (!document.hidden) {
+
+			generateOutfit();
+		}
+	}
+);
+
 fileInput.addEventListener("change", () => {
 
 	if (fileInput.files[0]) {
@@ -77,7 +88,8 @@ fileInput.addEventListener("change", () => {
 
 	} else {
 
-		resetUploadInputs();
+		fileText.textContent =
+			"Seleccionar prenda";
 	}
 });
 
@@ -88,7 +100,11 @@ function resetUploadInputs() {
 	fileText.textContent =
 		"Seleccionar prenda";
 
-	typeSelect.selectedIndex = 0;
+	typeSelect.value = "";
+
+	fileInput.type = "";
+
+	fileInput.type = "file";
 }
 
 function saveClothing() {
