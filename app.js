@@ -166,6 +166,8 @@ function openCloset() {
 	renderCloset();
 
 	closetModal.classList.add("open");
+	
+	document.body.classList.add("modal-open");
 }
 
 function closeCloset() {
