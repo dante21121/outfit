@@ -5,15 +5,15 @@
 	<meta charset="UTF-8" />
 
 	<meta
-	name="viewport"
-	content="
-		width=device-width,
-		initial-scale=1.0,
-		maximum-scale=1.0,
-		user-scalable=no,
-		viewport-fit=cover
-	"
-    />
+		name="viewport"
+		content="
+			width=device-width,
+			initial-scale=1.0,
+			maximum-scale=1.0,
+			user-scalable=no,
+			viewport-fit=cover
+		"
+	/>
 
 	<title>Outfit App</title>
 
@@ -56,6 +56,7 @@
 			>
 				<img id="shoesImage" src="" alt="">
 			</div>
+
 		</section>
 
 		<button id="generateBtn" class="generate-btn">
@@ -167,7 +168,50 @@
 
 	</div>
 
+
+
+
+
+	<div id="confirmModal" class="confirm-modal">
+
+		<div class="confirm-box">
+
+			<h3>
+				¿Eliminar prenda?
+			</h3>
+
+			<p>
+				Esta acción no se puede deshacer.
+			</p>
+
+			<div class="confirm-buttons">
+
+				<button
+					id="cancelDeleteBtn"
+					class="cancel-btn"
+				>
+					Cancelar
+				</button>
+
+				<button
+					id="confirmDeleteBtn"
+					class="confirm-delete-btn"
+				>
+					Eliminar
+				</button>
+
+			</div>
+
+		</div>
+
+	</div>
+
+
+
+
+
 	<script src="storage.js"></script>
+
 	<script src="app.js"></script>
 
 </body>
