@@ -139,36 +139,13 @@ function renderCategory(container, items, type) {
 
 			<button
 				class="delete-btn"
-				data-id="${item.id}"
-				data-type="${type}"
+				onclick="deleteClothing(${item.id}, '${type}')"
 			>
 				×
 			</button>
 		`;
 
 		container.appendChild(card);
-	});
-
-	addDeleteEvents();
-}
-
-function addDeleteEvents() {
-
-	const buttons =
-		document.querySelectorAll(".delete-btn");
-
-	buttons.forEach(button => {
-
-		button.onclick = () => {
-
-			const id =
-				Number(button.dataset.id);
-
-			const type =
-				button.dataset.type;
-
-			deleteClothing(id, type);
-		};
 	});
 }
 
