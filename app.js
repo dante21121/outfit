@@ -26,7 +26,18 @@ const bottomGrid = document.getElementById("bottomGrid");
 
 const shoesGrid = document.getElementById("shoesGrid");
 
+const categorySections =
+	document.querySelectorAll(".category-section");
+
 let clothes = getClothes();
+
+let currentOutfit = {
+	top: null,
+	bottom: null,
+	shoes: null
+};
+
+let selectingType = null;
 
 saveBtn.addEventListener("click", saveClothing);
 
@@ -90,17 +101,34 @@ function saveClothing() {
 
 function generateOutfit() {
 
-	const top = getRandomItem(clothes.top);
+	currentOutfit.top =
+		getRandomItem(clothes.top);
 
-	const bottom = getRandomItem(clothes.bottom);
+	currentOutfit.bottom =
+		getRandomItem(clothes.bottom);
 
-	const shoes = getRandomItem(clothes.shoes);
+	currentOutfit.shoes =
+		getRandomItem(clothes.shoes);
 
-	renderImage(topImage, top);
+	renderOutfit();
+}
 
-	renderImage(bottomImage, bottom);
+function renderOutfit() {
 
-	renderImage(shoesImage, shoes);
+	renderImage(
+		topImage,
+		currentOutfit.top
+	);
+
+	renderImage(
+		bottomImage,
+		currentOutfit.bottom
+	);
+
+	renderImage(
+		shoesImage,
+		currentOutfit.shoes
+	);
 }
 
 function getRandomItem(array) {
@@ -127,6 +155,13 @@ function renderImage(element, item) {
 }
 
 function openCloset() {
+
+	selectingType = null;
+
+	categorySections.forEach(section => {
+
+		section.style.display = "block";
+	});
 
 	renderCloset();
 
@@ -158,7 +193,10 @@ function renderCategory(container, items, type) {
 		card.className = "clothing-card";
 
 		card.innerHTML = `
-			<img src="${item.image}">
+			<img
+				src="${item.image}"
+				onclick="selectClothing('${type}', ${item.id})"
+			>
 
 			<button
 				class="delete-btn"
@@ -183,7 +221,66 @@ function deleteClothing(id, type) {
 
 	renderCloset();
 
-	generateOutfit();
+	if (
+		currentOutfit[type] &&
+		currentOutfit[type].id === id
+	) {
+
+		currentOutfit[type] =
+			getRandomItem(clothes[type]);
+
+		renderOutfit();
+	}
+}
+
+function openCategorySelector(type) {
+
+	selectingType = type;
+
+	closetModal.classList.add("open");
+
+	categorySections.forEach(section => {
+
+		section.style.display = "none";
+	});
+
+	if (type === "top") {
+
+		topGrid.parentElement.style.display =
+			"block";
+	}
+
+	if (type === "bottom") {
+
+		bottomGrid.parentElement.style.display =
+			"block";
+	}
+
+	if (type === "shoes") {
+
+		shoesGrid.parentElement.style.display =
+			"block";
+	}
+
+	renderCloset();
+}
+
+function selectClothing(type, id) {
+
+	if (!selectingType) return;
+
+	const item =
+		clothes[type].find(
+			item => item.id === id
+		);
+
+	if (!item) return;
+
+	currentOutfit[type] = item;
+
+	renderOutfit();
+
+	closeCloset();
 }
 
 renderCloset();
