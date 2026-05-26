@@ -153,7 +153,43 @@ function saveClothing() {
 	reader.readAsDataURL(file);
 }
 
-function generateOutfit() {
+async function generateOutfit() {
+
+	const duration = 500;
+
+	const interval = 80;
+
+	const loops =
+		Math.floor(duration / interval);
+
+	for (let i = 0; i < loops; i++) {
+
+		const randomTop =
+			getRandomItem(clothes.top);
+
+		const randomBottom =
+			getRandomItem(clothes.bottom);
+
+		const randomShoes =
+			getRandomItem(clothes.shoes);
+
+		renderImage(
+			topImage,
+			randomTop
+		);
+
+		renderImage(
+			bottomImage,
+			randomBottom
+		);
+
+		renderImage(
+			shoesImage,
+			randomShoes
+		);
+
+		await wait(interval);
+	}
 
 	currentOutfit.top =
 		getRandomItem(clothes.top);
@@ -194,6 +230,14 @@ function getRandomItem(array) {
 			Math.random() * array.length
 		)
 	];
+}
+
+function wait(ms) {
+
+	return new Promise(resolve => {
+
+		setTimeout(resolve, ms);
+	});
 }
 
 function renderImage(element, item) {
