@@ -160,16 +160,37 @@ async function generateOutfit() {
 	const loops =
 		Math.floor(duration / interval);
 
+	let lastTop = null;
+
+	let lastBottom = null;
+
+	let lastShoes = null;
+
 	for (let i = 0; i < loops; i++) {
 
 		const randomTop =
-			getRandomItem(clothes.top);
+			getDifferentItem(
+				clothes.top,
+				lastTop
+			);
 
 		const randomBottom =
-			getRandomItem(clothes.bottom);
+			getDifferentItem(
+				clothes.bottom,
+				lastBottom
+			);
 
 		const randomShoes =
-			getRandomItem(clothes.shoes);
+			getDifferentItem(
+				clothes.shoes,
+				lastShoes
+			);
+
+		lastTop = randomTop;
+
+		lastBottom = randomBottom;
+
+		lastShoes = randomShoes;
 
 		renderImage(
 			topImage,
@@ -200,7 +221,6 @@ async function generateOutfit() {
 
 	renderOutfit();
 }
-
 function renderOutfit() {
 
 	renderImage(
@@ -228,6 +248,29 @@ function getRandomItem(array) {
 			Math.random() * array.length
 		)
 	];
+}
+
+function getDifferentItem(array, lastItem) {
+
+	if (array.length === 0) return null;
+
+	if (array.length === 1) {
+
+		return array[0];
+	}
+
+	let item;
+
+	do {
+
+		item = getRandomItem(array);
+
+	} while (
+		lastItem &&
+		item.id === lastItem.id
+	);
+
+	return item;
 }
 
 function wait(ms) {
