@@ -1,5 +1,7 @@
 const fileInput = document.getElementById("fileInput");
 
+const fileText = document.getElementById("fileText");
+
 const typeSelect = document.getElementById("typeSelect");
 
 const saveBtn = document.getElementById("saveBtn");
