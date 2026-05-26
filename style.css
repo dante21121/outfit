@@ -144,13 +144,20 @@ button:active {
 
 .closet-modal {
 	position: fixed;
-	inset: 0;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100dvh;
 	background: #0f0f10;
-	z-index: 500;
+	z-index: 9999;
+
 	transform: translateX(100%);
-	transition: 0.35s;
+	transition: transform 0.35s ease;
+
 	display: flex;
 	flex-direction: column;
+
+	overflow: hidden;
 }
 
 .closet-modal.open {
@@ -182,9 +189,15 @@ button:active {
 }
 
 .closet-content {
+	flex: 1;
+
 	padding: 20px;
-	padding-bottom: 120px;
+	padding-bottom: 140px;
+
 	overflow-y: auto;
+	overflow-x: hidden;
+
+	background: #0f0f10;
 }
 
 .category-section {
@@ -257,4 +270,8 @@ html,
 body {
 	touch-action: manipulation;
 	overflow-x: hidden;
+}
+
+body.modal-open {
+	overflow: hidden;
 }
