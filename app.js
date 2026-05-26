@@ -29,6 +29,15 @@ const shoesGrid = document.getElementById("shoesGrid");
 const categorySections =
 	document.querySelectorAll(".category-section");
 
+const confirmModal =
+	document.getElementById("confirmModal");
+
+const cancelDeleteBtn =
+	document.getElementById("cancelDeleteBtn");
+
+const confirmDeleteBtn =
+	document.getElementById("confirmDeleteBtn");
+
 let clothes = getClothes();
 
 let currentOutfit = {
@@ -39,6 +48,8 @@ let currentOutfit = {
 
 let selectingType = null;
 
+let deleteData = null;
+
 saveBtn.addEventListener("click", saveClothing);
 
 generateBtn.addEventListener("click", generateOutfit);
@@ -46,6 +57,16 @@ generateBtn.addEventListener("click", generateOutfit);
 closetBtn.addEventListener("click", openCloset);
 
 closeClosetBtn.addEventListener("click", closeCloset);
+
+cancelDeleteBtn.addEventListener(
+	"click",
+	closeDeleteModal
+);
+
+confirmDeleteBtn.addEventListener(
+	"click",
+	confirmDelete
+);
 
 fileInput.addEventListener("change", () => {
 
@@ -56,10 +77,19 @@ fileInput.addEventListener("change", () => {
 
 	} else {
 
-		fileText.textContent =
-			"Seleccionar prenda";
+		resetUploadInputs();
 	}
 });
+
+function resetUploadInputs() {
+
+	fileInput.value = "";
+
+	fileText.textContent =
+		"Seleccionar prenda";
+
+	typeSelect.selectedIndex = 0;
+}
 
 function saveClothing() {
 
@@ -84,12 +114,7 @@ function saveClothing() {
 
 		saveClothes(clothes);
 
-		fileInput.value = "";
-
-		fileText.textContent =
-			"Seleccionar prenda";
-
-		typeSelect.selectedIndex = 0;
+		resetUploadInputs();
 
 		renderCloset();
 
@@ -166,7 +191,7 @@ function openCloset() {
 	renderCloset();
 
 	closetModal.classList.add("open");
-	
+
 	document.body.classList.add("modal-open");
 }
 
@@ -175,7 +200,6 @@ function closeCloset() {
 	closetModal.classList.remove("open");
 
 	document.body.classList.remove("modal-open");
-	
 }
 
 function renderCloset() {
@@ -200,22 +224,60 @@ function renderCategory(container, items, type) {
 		card.innerHTML = `
 			<img
 				src="${item.image}"
-				onclick="selectClothing('${type}', ${item.id})"
+				class="closet-image"
 			>
 
 			<button
 				class="delete-btn"
-				onclick="deleteClothing(${item.id}, '${type}')"
 			>
 				×
 			</button>
 		`;
 
+		const image =
+			card.querySelector(".closet-image");
+
+		image.onclick = () => {
+
+			selectClothing(type, item.id);
+		};
+
+		const deleteBtn =
+			card.querySelector(".delete-btn");
+
+		deleteBtn.onclick = (e) => {
+
+			e.stopPropagation();
+
+			openDeleteModal(item.id, type);
+		};
+
 		container.appendChild(card);
 	});
 }
 
-function deleteClothing(id, type) {
+function openDeleteModal(id, type) {
+
+	deleteData = {
+		id,
+		type
+	};
+
+	confirmModal.classList.add("open");
+}
+
+function closeDeleteModal() {
+
+	confirmModal.classList.remove("open");
+
+	deleteData = null;
+}
+
+function confirmDelete() {
+
+	if (!deleteData) return;
+
+	const { id, type } = deleteData;
 
 	clothes[type] =
 		clothes[type].filter(
@@ -236,6 +298,8 @@ function deleteClothing(id, type) {
 
 		renderOutfit();
 	}
+
+	closeDeleteModal();
 }
 
 function openCategorySelector(type) {
@@ -243,6 +307,8 @@ function openCategorySelector(type) {
 	selectingType = type;
 
 	closetModal.classList.add("open");
+
+	document.body.classList.add("modal-open");
 
 	categorySections.forEach(section => {
 
