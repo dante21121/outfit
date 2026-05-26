@@ -252,3 +252,9 @@ button:active {
 .custom-file-upload input {
 	display: none;
 }
+
+html,
+body {
+	touch-action: manipulation;
+	overflow-x: hidden;
+}
