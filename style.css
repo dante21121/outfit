@@ -275,3 +275,74 @@ body {
 body.modal-open {
 	overflow: hidden;
 }
+
+.confirm-modal {
+	position: fixed;
+	inset: 0;
+	background: rgba(0,0,0,0.55);
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	z-index: 20000;
+
+	opacity: 0;
+	pointer-events: none;
+
+	transition: 0.2s;
+}
+
+.confirm-modal.open {
+	opacity: 1;
+	pointer-events: all;
+}
+
+.confirm-box {
+	width: calc(100% - 40px);
+	max-width: 340px;
+
+	background: #1b1b1d;
+
+	border-radius: 28px;
+
+	padding: 24px;
+
+	text-align: center;
+
+	border: 1px solid rgba(255,255,255,0.05);
+}
+
+.confirm-box h3 {
+	font-size: 22px;
+	margin-bottom: 10px;
+}
+
+.confirm-box p {
+	color: rgba(255,255,255,0.7);
+	line-height: 1.4;
+	margin-bottom: 24px;
+}
+
+.confirm-buttons {
+	display: flex;
+	gap: 12px;
+}
+
+.cancel-btn {
+	background: #2a2a2d;
+}
+
+.confirm-delete-btn {
+	background: #ff453a;
+}
+
+.confirm-buttons button {
+	flex: 1;
+	height: 52px;
+	border-radius: 16px;
+	border: none;
+	color: white;
+	font-size: 16px;
+	font-weight: 600;
+}
