@@ -173,6 +173,9 @@ function openCloset() {
 function closeCloset() {
 
 	closetModal.classList.remove("open");
+
+	document.body.classList.remove("modal-open");
+	
 }
 
 function renderCloset() {
